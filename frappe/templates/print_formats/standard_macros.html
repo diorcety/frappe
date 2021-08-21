@@ -170,12 +170,15 @@ data-fieldname="{{ df.fieldname }}" data-fieldtype="{{ df.fieldtype }}"
     {% if doc.print_heading_template %}
         {{ frappe.render_template(doc.print_heading_template, {"doc":doc}) }}
     {% else %}
-    <div class="print-heading">
-		<h2>{{ doc.select_print_heading or (doc.print_heading if doc.print_heading != None
-			else _(doc.doctype)) }}<br>
-			<small>{{ doc.sub_heading if doc.sub_heading != None
-				else doc.name }}</small>
-        </h2>
+		<div class="print-heading">
+			<div style="float: left;"><svg class="docname-barcode" jsbarcode-margin="0" jsbarcode-displayValue="false" jsbarcode-height="60" jsbarcode-value="{{ doc.sub_heading if doc.sub_heading != None else doc.name }}"></svg></div>
+			<h2>{{ doc.select_print_heading or (doc.print_heading if doc.print_heading != None else _(doc.doctype)) }}<br>
+				<small>{{ doc.sub_heading if doc.sub_heading != None else doc.name }}</small>
+			</h2>
+			<script src="/assets/js/barcode.min.js"></script>
+			<script>
+				JsBarcode(".docname-barcode").init();
+			</script>
     </div>
     {% endif %}
 	{%- if doc.meta.is_submittable and doc.docstatus==0 and (print_settings==None or print_settings.add_draft_heading) -%}

@@ -339,5 +339,8 @@
 	],
 	"js/data_import_tools.min.js": [
 		"public/js/frappe/data_import/index.js"
+	],
+	"js/barcode.min.js": [
+		"public/js/barcode.js"
 	]
 }
